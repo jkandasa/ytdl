@@ -36,9 +36,6 @@ jobs:
             **/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
 
-      - name: Build UI
-        run: make build-ui
-
       - uses: docker/setup-buildx-action@v1
 
       - name: Build container and push
