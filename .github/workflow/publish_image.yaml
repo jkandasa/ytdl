@@ -1,0 +1,45 @@
+name: publish container image
+on:
+  push:
+    branches: [master]
+
+jobs:
+  setup-container-images:
+    name: build image and publish
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout source code
+        uses: actions/checkout@v2
+
+      - name: Login in to docker.io registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.io
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      - uses: actions/setup-go@v2
+        with:
+          go-version: ^1.17
+
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "15"
+      
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Build UI
+        run: make build-ui
+
+      - uses: docker/setup-buildx-action@v1
+
+      - name: Build container and push
+        run: ./scripts/publish_container_image.sh
