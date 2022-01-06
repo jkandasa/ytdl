@@ -1,15 +1,25 @@
 package youtubedr
 
 type VideoFormat struct {
-	Itag          int    `json:"iTag"`
-	FPS           int    `json:"fps"`
-	VideoQuality  string `json:"videoQuality"`
-	AudioQuality  string `json:"audioQuality"`
-	AudioChannels int    `json:"audioChannels"`
-	Size          int64  `json:"size"`
-	Bitrate       int    `json:"bitrate"`
-	MimeType      string `json:"mimeType"`
-	URL           string `json:"url"`
+	Itag             int    `json:"iTag"`
+	URL              string `json:"url"`
+	MimeType         string `json:"mimeType"`
+	Quality          string `json:"quality"`
+	Cipher           string `json:"signatureCipher"`
+	Bitrate          int    `json:"bitrate"`
+	FPS              int    `json:"fps"`
+	Width            int    `json:"width"`
+	Height           int    `json:"height"`
+	LastModified     string `json:"lastModified"`
+	ContentLength    int64  `json:"contentLength,string"`
+	ProjectionType   string `json:"projectionType"`
+	VideoQuality     string `json:"videoQuality"`
+	Size             int64  `json:"size"`
+	AverageBitrate   int    `json:"averageBitrate"`
+	AudioQuality     string `json:"audioQuality"`
+	ApproxDurationMs string `json:"approxDurationMs"`
+	AudioSampleRate  string `json:"audioSampleRate"`
+	AudioChannels    int    `json:"audioChannels"`
 }
 
 type VideoInfo struct {

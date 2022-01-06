@@ -65,16 +65,21 @@ const columns = [
   {
     title: "Download",
     dataIndex: "url",
-    render: (text) => (
-      <Button
-        type="primary"
-        shape="round"
-        icon={<DownloadOutlined />}
-        size="small"
-        href={text}
-        target="_blank"
-      />
-    ),
+    render: (text) => {
+      if (text === "") {
+        return null
+      }
+      return (
+        <Button
+          type="primary"
+          shape="round"
+          icon={<DownloadOutlined />}
+          size="small"
+          href={text}
+          target="_blank"
+        />
+      )
+    },
   },
 ]
 

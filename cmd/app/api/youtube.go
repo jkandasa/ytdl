@@ -63,15 +63,25 @@ func getVideoInfo(w http.ResponseWriter, r *http.Request) {
 		}
 
 		videoInfo.Formats = append(videoInfo.Formats, ytTY.VideoFormat{
-			Itag:          format.ItagNo,
-			FPS:           format.FPS,
-			VideoQuality:  format.QualityLabel,
-			AudioQuality:  strings.ToLower(strings.TrimPrefix(format.AudioQuality, "AUDIO_QUALITY_")),
-			AudioChannels: format.AudioChannels,
-			Size:          size,
-			Bitrate:       bitrate,
-			MimeType:      format.MimeType,
-			URL:           format.URL,
+			Itag:             format.ItagNo,
+			URL:              format.URL,
+			MimeType:         format.MimeType,
+			Quality:          format.Quality,
+			Cipher:           format.Cipher,
+			Bitrate:          bitrate,
+			FPS:              format.FPS,
+			Width:            format.Width,
+			Height:           format.Height,
+			LastModified:     format.LastModified,
+			ContentLength:    format.ContentLength,
+			ProjectionType:   format.ProjectionType,
+			VideoQuality:     format.QualityLabel,
+			Size:             size,
+			AverageBitrate:   format.AverageBitrate,
+			AudioQuality:     strings.ToLower(strings.TrimPrefix(format.AudioQuality, "AUDIO_QUALITY_")),
+			ApproxDurationMs: format.ApproxDurationMs,
+			AudioSampleRate:  format.AudioSampleRate,
+			AudioChannels:    format.AudioChannels,
 		})
 	}
 
