@@ -1,7 +1,10 @@
-FROM --platform=${BUILDPLATFORM} golang:1.17-alpine3.15 AS builder
+FROM --platform=${BUILDPLATFORM} golang:1.23-alpine3.21 AS builder
 RUN mkdir /app
 ADD . /app
 WORKDIR /app
+
+# install timzone utils
+RUN apk --no-cache add tzdata
 
 ARG GOPROXY
 # download deps before gobuild
@@ -10,7 +13,7 @@ ARG TARGETOS
 ARG TARGETARCH
 RUN scripts/container_binary.sh
 
-FROM alpine:3.15
+FROM alpine:3.21
 
 LABEL maintainer="Jeeva Kandasamy <jkandasa@gmail.com>"
 
